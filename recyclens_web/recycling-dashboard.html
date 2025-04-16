@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recycling Center Dashboard - RecycLens</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7fafc;
+    }
+
+    header {
+      background-color: #6b46c1;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logout-btn {
+      background-color: #e53e3e;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #c53030;
+    }
+
+    .dashboard {
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      color: #553c9a;
+      margin-bottom: 10px;
+    }
+
+    .action-btn {
+      padding: 10px 18px;
+      background-color: #6b46c1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      background-color: #553c9a;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #dcdcdc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #edf2f7;
+    }
+
+    .stat-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .stat-item h3 {
+      margin-bottom: 8px;
+      color: #553c9a;
+    }
+
+    .stat-item p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2d3748;
+    }
+
+    input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.success-message {
+  background-color: #c6f6d5;
+  color: #22543d;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RecycLens - Recycling Center Dashboard</h1>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+    <!-- Stats Section -->
+    <div class="stat-item">
+      <h3>📦 Pending Pickups</h3>
+      <p>10 Pickups Pending</p>
+    </div>
+
+    <div class="stat-item">
+      <h3>✅ Completed Pickups</h3>
+      <p>200 Pickups Completed</p>
+    </div>
+
+    <div class="stat-item">
+      <h3>🎁 Total Rewards Distributed</h3>
+      <p>₹15,000</p>
+    </div>
+
+    <!-- Pending Pickup Requests -->
+    <div class="card">
+      <h2>🚛 Pending Pickup Requests</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pickup ID</th>
+            <th>User</th>
+            <th>Location</th>
+            <th>Device</th>
+            <th>Reward</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>101</td>
+            <td>user1</td>
+            <td>Sector 12, Delhi</td>
+            <td>Old Laptop</td>
+            <td>₹200</td>
+            <td><button class="action-btn" onclick="confirmPickup(101)">Confirm Pickup</button></td>
+          </tr>
+          <tr>
+            <td>102</td>
+            <td>user2</td>
+            <td>Borivali, Mumbai</td>
+            <td>Mobile Phone</td>
+            <td>₹150</td>
+            <td><button class="action-btn" onclick="confirmPickup(102)">Confirm Pickup</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Completed Pickups -->
+    <div class="card">
+      <h2>✅ Completed Pickups</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pickup ID</th>
+            <th>User</th>
+            <th>Location</th>
+            <th>Device</th>
+            <th>Reward</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>user5</td>
+            <td>Koramangala, Bangalore</td>
+            <td>Old Desktop</td>
+            <td>₹250</td>
+            <td>Completed</td>
+          </tr>
+          <tr>
+            <td>1002</td>
+            <td>user6</td>
+            <td>Andheri, Mumbai</td>
+            <td>CRT Monitor</td>
+            <td>₹100</td>
+            <td>Completed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+ <!-- Agent Confirmation and Reward -->
+ <div class="card">
+    <h2>👷 Agent Confirmation & Reward Distribution</h2>
+    <form id="rewardForm">
+      <label for="agentName">Agent Name:</label>
+      <input type="text" id="agentName" required>
+
+      <label for="userName">User's Name:</label>
+      <input type="text" id="userName" required>
+
+      <label for="verifiedDevice">Verified Device Type:</label>
+      <input type="text" id="verifiedDevice" required>
+
+      <label for="rewardAmount">Agreed Reward Amount (₹):</label>
+      <input type="number" id="rewardAmount" required>
+
+      <label for="accountNumber">User Bank Account No:</label>
+      <input type="text" id="accountNumber" required>
+
+      <button type="submit" class="action-btn">Distribute Reward</button>
+      <div id="rewardStatus" class="success-message"></div>
+    </form>
+  </div>
+  
+  <!-- Messages Section -->
+  <div class="card">
+      <h2>📨 Messages to Admin</h2>
+      <textarea id="messageText" placeholder="Type your message here..." rows="4" required></textarea>
+      <button class="action-btn" onclick="sendMessage()">Send Message</button>
+      <div id="messageStatus" class="success-message"></div>
+    </div>
+</div>
+
+
+  <script>
+    function logout() {
+      alert("Logged out!");
+      window.location.href = "index.html";
+    };
+  </script>
+</body>
+</html>
