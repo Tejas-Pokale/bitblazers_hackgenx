@@ -53,3 +53,77 @@ body {
   .login-btn:hover {
     background-color: #2f855a;
   }
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .form-container h2 {
+    color: #553c9a;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 16px;
+    color: #2d3748;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #f7fafc;
+    box-sizing: border-box;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #6b46c1;
+    background-color: #fff;
+  }
+  
+  .action-btn {
+    background-color: #6b46c1;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .action-btn:hover {
+    background-color: #553c9a;
+  }
+  
+  .success-message {
+    color: #38a169;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: #e53e3e;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .reward-distribution,
+  .message-to-admin {
+    margin-top: 20px;
+  }
+  
+  .reward-distribution label,
+  .message-to-admin label {
+    margin-top: 10px;
+  }
