@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Centers - RecycLens Admin</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7fafc;
+    }
+
+    header {
+      background-color: #6b46c1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .filter-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filter-section input, .filter-section select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .center-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    th {
+      background-color: #edf2f7;
+      color: #4a5568;
+    }
+
+    td {
+      color: #2d3748;
+    }
+
+    .action-btn {
+      background-color: #6b46c1;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .action-btn:hover {
+      background-color: #553c9a;
+    }
+
+    .add-form {
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .add-form h2 {
+      color: #553c9a;
+      margin-bottom: 20px;
+    }
+
+    .add-form input, .add-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      background-color: #38a169;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #2f855a;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Admin-Manage Centers</h1>
+  </header>
+
+  <div class="container">
+    
+    <!-- Filter/Search Section -->
+    <div class="filter-section">
+      <input type="text" id="searchInput" placeholder="Search by center name or location" onkeyup="filterTable()">
+      <select id="typeFilter" onchange="filterTable()">
+        <option value="">All Types</option>
+        <option value="Recycling">Recycling</option>
+        <option value="Disposing">Disposing</option>
+      </select>
+    </div>
+
+    <!-- Centers Table -->
+    <table class="center-table" id="centerTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Center Name</th>
+          <th>Type</th>
+          <th>Location</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample Data (Dynamic in future) -->
+        <tr>
+          <td>1</td>
+          <td>GreenTech Recycler</td>
+          <td>Recycling</td>
+          <td>Delhi</td>
+          <td>green_user</td>
+          <td>12345</td>
+          <td><button class="action-btn">Update</button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>EcoDrop Disposal</td>
+          <td>Disposing</td>
+          <td>Mumbai</td>
+          <td>eco_disp</td>
+          <td>disp2025</td>
+          <td><button class="action-btn">Update</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Add / Update Center Form -->
+    <div class="add-form">
+      <h2>Add / Update Center</h2>
+      <form id="centerForm">
+        <input type="text" placeholder="Center Name" id="centerName" required>
+        <select id="centerType" required>
+          <option value="">Select Type</option>
+          <option value="Recycling">Recycling</option>
+          <option value="Disposing">Disposing</option>
+        </select>
+        <input type="text" placeholder="Location" id="centerLocation" required>
+        <input type="text" placeholder="Username" id="centerUsername" required>
+        <input type="text" placeholder="Password" id="centerPassword" required>
+        <button type="submit" class="submit-btn">Save Center</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    function filterTable() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const type = document.getElementById("typeFilter").value.toLowerCase();
+      const table = document.getElementById("centerTable");
+      const rows = table.getElementsByTagName("tr");
+
+      for (let i = 1; i < rows.length; i++) {
+        let name = rows[i].cells[1].innerText.toLowerCase();
+        let loc = rows[i].cells[3].innerText.toLowerCase();
+        let typeText = rows[i].cells[2].innerText.toLowerCase();
+
+        const matchesSearch = name.includes(search) || loc.includes(search);
+        const matchesType = !type || typeText === type;
+
+        rows[i].style.display = (matchesSearch && matchesType) ? "" : "none";
+      }
+    }
+
+    document.getElementById("centerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Center info saved successfully! (You can link this to backend in Flask)");
+      // TODO: Add actual backend request
+      this.reset();
+    });
+  </script>
+</body>
+</html>
