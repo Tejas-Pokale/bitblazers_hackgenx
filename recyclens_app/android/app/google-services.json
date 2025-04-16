@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928602459906",
+    "project_id": "recyclens-hackgenx",
+    "storage_bucket": "recyclens-hackgenx.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928602459906:android:fe822a0155cc1125ae3c1b",
+        "android_client_info": {
+          "package_name": "com.example.recyclens_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbkanNnQxYgtb8wEsRmUq-9RIrIoFG5p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
