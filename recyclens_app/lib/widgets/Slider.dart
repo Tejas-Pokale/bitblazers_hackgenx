@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:recyclens/data/slider_data.dart';
+import 'package:recyclens_app/data/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MySlider extends StatefulWidget {

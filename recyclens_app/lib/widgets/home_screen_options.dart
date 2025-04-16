@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recyclens/pages/disposing_centers.dart';
-import 'package:recyclens/pages/image_scanner.dart';
-import 'package:recyclens/pages/insights.dart';
-import 'package:recyclens/pages/recycling_centers.dart';
-import 'package:recyclens/pages/report_ewaste.dart';
-import 'package:recyclens/pages/rewards.dart';
-import 'package:recyclens/pages/statistics.dart';
-import 'package:recyclens/pages/tracking.dart';
+import 'package:recyclens_app/pages/home/home_options/disposing_centers.dart';
+import 'package:recyclens_app/pages/home/home_options/image_scanner.dart';
+import 'package:recyclens_app/pages/home/home_options/insights.dart';
+import 'package:recyclens_app/pages/home/home_options/recycling_centers.dart';
+import 'package:recyclens_app/pages/home/home_options/report_ewaste.dart';
+import 'package:recyclens_app/pages/home/home_options/rewards.dart';
+import 'package:recyclens_app/pages/home/home_options/tracking.dart';
 
 class HomeScreenOptions extends StatelessWidget {
   final List<_Option> options = [
@@ -23,8 +22,6 @@ class HomeScreenOptions extends StatelessWidget {
         (context) => Get.to(() => RewardsPage(), transition: Transition.cupertinoDialog)),
     _Option('Report E-Waste in Public', Icons.report, Colors.pinkAccent,
         (context) => Get.to(() => ReportEwastePage(), transition: Transition.cupertinoDialog)),
-    _Option('Overall Statistics', Icons.bar_chart, Colors.purpleAccent,
-        (context) => Get.to(() => StatisticsPage(), transition: Transition.cupertinoDialog)),
     _Option('Insights on E-Waste', Icons.menu_book, Colors.lightBlueAccent,
         (context) => Get.to(() => InsightsPage(), transition: Transition.cupertinoDialog)),
   ];

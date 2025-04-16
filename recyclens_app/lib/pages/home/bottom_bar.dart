@@ -84,13 +84,6 @@ class _HomePageState extends State<BottomBarPage> {
                 selectedColor: Colors.pink,
               ),
           
-              /// Search
-              // SalomonBottomBarItem(
-              //   icon: Icon(Icons.search),
-              //   title: Text("Search"),
-              //   selectedColor: Colors.orange,
-              // ),
-          
               /// Marketplace
               SalomonBottomBarItem(
                 icon: Icon(Icons.shopify_rounded),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:recyclens_app/controllers/home_bottombar_controller.dart';
+import 'package:recyclens_app/widgets/Slider.dart';
+import 'package:recyclens_app/widgets/home_screen_options.dart';
 import 'package:scroll_to_hide/scroll_to_hide.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +25,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
             children: [
-            
+              MySlider(),
+              HomeScreenOptions(),
               //     FancyUploadButton(
               //   onTap: () {
               //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ImageScanScreen(),));
