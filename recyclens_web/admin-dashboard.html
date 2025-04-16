@@ -72,3 +72,167 @@
     .action-btn:hover {
       background-color: #553c9a;
     }
+
+    .success-message {
+      background-color: #c6f6d5;
+      color: #22543d;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #dcdcdc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #edf2f7;
+    }
+
+    .stats-card {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 23%;
+    }
+
+    .stat-item h3 {
+      margin-bottom: 8px;
+      color: #553c9a;
+    }
+
+    .stat-item p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RecycLens - Admin Panel</h1>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+    <!-- Stats Section -->
+    <div class="stats-card">
+      <div class="stat-item">
+        <h3>🗑️ Total Recycled</h3>
+        <p>2000 devices</p>
+      </div>
+      <div class="stat-item">
+        <h3>🎁 Total Rewards</h3>
+        <p>₹2,00,000 distributed</p>
+      </div>
+      <div class="stat-item">
+        <h3>🏢 Centers Registered</h3>
+        <p>15 centers</p>
+      </div>
+    </div>
+
+    <!-- Community Interaction -->
+    <div class="card">
+      <h2>📢 Community Announcement</h2>
+      <form id="communityForm">
+        <label for="announcement">Message to all users:</label>
+        <textarea id="announcement" placeholder="Enter your message here..." required></textarea>
+        <button type="submit" class="action-btn">Send</button>
+        <div id="communityStatus" class="success-message"></div>
+      </form>
+    </div>
+
+    <!-- Insights Upload -->
+    <div class="card">
+      <h2>📚 Upload Insight on E-Waste</h2>
+      <form id="insightForm">
+        <label for="insightTitle">Title:</label>
+        <input type="text" id="insightTitle" required>
+
+        <label for="insightDesc">Description:</label>
+        <textarea id="insightDesc" required></textarea>
+
+        <label for="uploadFile">Upload File:</label>
+        <input type="file" id="uploadFile">
+
+        <button type="submit" class="action-btn">Upload</button>
+        <div id="insightStatus" class="success-message"></div>
+      </form>
+    </div>
+
+    <!-- User Reports -->
+    <div class="card">
+      <h2>🚨 User Reported Issues</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Reported On</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tejas</td>
+            <td>Nagpur - Sitabuldi</td>
+            <td>Large pile of mobile boards dumped.</td>
+            <td>2025-04-16</td>
+          </tr>
+          <tr>
+            <td>Manav</td>
+            <td>Amravati Road</td>
+            <td>CRT Monitors found in abandoned plot.</td>
+            <td>2025-04-16</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Centers Management -->
+    <div class="card">
+      <h2>🛠️ Manage Centers</h2>
+      <button class="action-btn" onclick="manageCenters()">Manage Centers</button>
+    </div>
+
+    <!-- View Reports -->
+    <div class="card">
+      <h2>📁 View Reports</h2>
+      <button class="action-btn" onclick="viewReports()">View All Reports</button>
+    </div>
+
+    <!-- Total Rewards Section -->
+    <div class="card">
+      <h2>💰 Total Rewards Distributed</h2>
+      <p style="font-size: 24px; font-weight: bold;">₹2,00,000</p>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      alert("Admin logged out!");
+      window.location.href = "index.html";
+    }
+
+  </script>
+</body>
+</html>
