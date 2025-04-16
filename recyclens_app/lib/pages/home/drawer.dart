@@ -6,7 +6,12 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recyclens_app/controllers/drawer_controller.dart';
+import 'package:recyclens_app/pages/account/user_profile.dart';
+import 'package:recyclens_app/pages/auth/sign_in.dart';
 import 'package:recyclens_app/pages/home/bottom_bar.dart';
+import 'package:recyclens_app/pages/home/home_drawer/about.dart';
+import 'package:recyclens_app/pages/home/home_drawer/help_support.dart';
+import 'package:recyclens_app/pages/home/home_drawer/settings.dart';
 import 'package:rive_animated_icon/rive_animated_icon.dart';
 
 class DrawerPage extends StatefulWidget {
@@ -116,10 +121,13 @@ class _DrawerContentState extends State<DrawerContent> {
                         color: Colors.redAccent.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: const Column(
+                      child:  Column(
                         children: [
                           
                           ListTile(
+                            onTap: () {
+                              Get.to(UserProfilePage());
+                            },
                             leading: Icon(
                               Icons.person,
                               color: Colors.cyan,
@@ -133,6 +141,9 @@ class _DrawerContentState extends State<DrawerContent> {
                             ),
                           ),
                           ListTile(
+                            onTap: () {
+                              Get.to(SettingsPage());
+                            },
                             leading: Icon(
                               AntDesign.setting_outline,
                               color: Colors.cyan,
@@ -146,6 +157,9 @@ class _DrawerContentState extends State<DrawerContent> {
                             ),
                           ),
                           ListTile(
+                            onTap: () {
+                              Get.to(AboutPage());
+                            },
                             leading: Icon(
                               Icons.question_mark,
                               color: Colors.cyan,
@@ -159,6 +173,9 @@ class _DrawerContentState extends State<DrawerContent> {
                             ),
                           ),
                           ListTile(
+                            onTap: () {
+                              Get.to(HelpSupportPage());
+                            },
                             leading: Icon(
                               Icons.contact_support_outlined,
                               color: Colors.cyan,
@@ -181,6 +198,9 @@ class _DrawerContentState extends State<DrawerContent> {
                       width: 200,
                       height: 100,
                       child: ListTile(
+                        onTap: () {
+                              Get.to(SignInPage());
+                            },
                         leading: RiveAnimatedIcon(
                             riveIcon: RiveIcon.warning,
                             width: 50,

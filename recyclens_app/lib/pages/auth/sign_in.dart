@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:recyclens_app/pages/auth/sign_up.dart';
-import 'package:recyclens_app/pages/create_account/create_account.dart';
+import 'package:recyclens_app/pages/account/create_account.dart';
 import 'package:recyclens_app/utils/dialog_utils.dart';
 import 'package:recyclens_app/widgets/animated_gradient_background.dart';
 import 'package:recyclens_app/widgets/remember_me.dart';

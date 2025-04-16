@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:recyclens_app/controllers/drawer_controller.dart';
 import 'package:recyclens_app/controllers/home_bottombar_controller.dart';
 import 'package:recyclens_app/pages/auth/sign_in.dart';
+import 'package:recyclens_app/pages/fake/data_upload.dart';
 import 'package:recyclens_app/pages/home/drawer.dart';
 import 'firebase_options.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignInPage(),
+      home: DrawerPage(),
       builder: EasyLoading.init(),
     );
   }

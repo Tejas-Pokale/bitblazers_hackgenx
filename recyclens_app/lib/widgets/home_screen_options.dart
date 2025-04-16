@@ -21,7 +21,7 @@ class HomeScreenOptions extends StatelessWidget {
     _Option('Rewards Earned', Icons.card_giftcard, Colors.amberAccent,
         (context) => Get.to(() => RewardsPage(), transition: Transition.cupertinoDialog)),
     _Option('Report E-Waste in Public', Icons.report, Colors.pinkAccent,
-        (context) => Get.to(() => ReportEwastePage(), transition: Transition.cupertinoDialog)),
+        (context) => Get.to(() => ReportEWasteScreen(), transition: Transition.cupertinoDialog)),
     _Option('Insights on E-Waste', Icons.menu_book, Colors.lightBlueAccent,
         (context) => Get.to(() => InsightsPage(), transition: Transition.cupertinoDialog)),
   ];

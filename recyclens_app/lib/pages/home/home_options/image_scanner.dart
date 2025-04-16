@@ -25,7 +25,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   bool _imageCaptured = false;
   late Interpreter interpreter1;
   late Interpreter interpreter2;
-  dynamic Labels = ['Battery', 'Keyboard', 'Microwave', 'Mobile', 'Mouse', 'PCB', 'Player', 'Printer', 'Television', 'Washing Machine'];
+  dynamic Labels = ['Battery', 'Keyboard', 'Laptop', 'Microwave', 'Mobile', 'Mouse', 'PCB', 'Player', 'Printer', 'Television', 'Washing Machine'];
   dynamic types = ['resell', 'recycle', 'dispose'];
 
   @override
@@ -49,7 +49,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   Future<void> loadModel() async {
     try {
       interpreter1 = await Interpreter.fromAsset(
-        'assets/models/e_waste_classification.tflite',
+        'assets/models/classier.tflite',
       );
       interpreter2 = await Interpreter.fromAsset(
         'assets/models/ewaste_processing_model.tflite',
