@@ -49,7 +49,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   Future<void> loadModel() async {
     try {
       interpreter1 = await Interpreter.fromAsset(
-        'assets/models/classier.tflite',
+        'assets/models/classifier.tflite',
       );
       interpreter2 = await Interpreter.fromAsset(
         'assets/models/ewaste_processing_model.tflite',

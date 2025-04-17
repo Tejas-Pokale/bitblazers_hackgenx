@@ -27,7 +27,7 @@ class _HomePageState extends State<BottomBarPage> {
       appBar: _homeBottombarController.currentIndex == 2 ? null :  AppBar(
         elevation: 2,
         shadowColor: Theme.of(context).primaryColor,
-
+        
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(

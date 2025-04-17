@@ -225,9 +225,28 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
   }
 
-  void saveData() {
+  void saveData() async {
+  final user = UserModel(
+    name: _nameController.text.trim(),
+    phone: _phoneController.text.trim(),
+    location: _locationController.text.trim(),
+    age: selectedAge ?? 'Not selected', // use your state for AgePicker
+    gender: selectedGender ?? 'Not selected', // use your state for GenderPicker
+    userType: _userType,
+    imageUrl: pickedImagePath, // optional path from your ImagePicker
+  );
+
+  try {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .add(user.toMap());
+
+    _showSnackbar('Account created successfully');
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => const DrawerPage()),
     );
+  } catch (e) {
+    _showSnackbar('Failed to save user: $e');
   }
+}
 }

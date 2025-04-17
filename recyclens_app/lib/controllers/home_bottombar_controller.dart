@@ -15,7 +15,7 @@ class HomeBottombarController extends GetxController {
     pages = [
       HomePage(scrollController: bottom_bar_scroll_controller),
       CommunityPage(),
-      HomePage(scrollController: bottom_bar_scroll_controller),
+      //HomePage(scrollController: bottom_bar_scroll_controller),
       MarketplacePage(),
     ];
     super.onInit();

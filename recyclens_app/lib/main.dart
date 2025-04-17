@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:recyclens_app/controllers/drawer_controller.dart';
 import 'package:recyclens_app/controllers/home_bottombar_controller.dart';
+import 'package:recyclens_app/controllers/marketplace_drawer_controller.dart';
 import 'package:recyclens_app/pages/auth/sign_in.dart';
 import 'package:recyclens_app/pages/fake/data_upload.dart';
 import 'package:recyclens_app/pages/home/drawer.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
   );
 
   Get.put<MyDrawerController>(MyDrawerController());
+  Get.put<MarketplaceDrawerController>(MarketplaceDrawerController());
   Get.put<HomeBottombarController>(HomeBottombarController());
 
   runApp(const MyApp());

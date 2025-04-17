@@ -28,12 +28,6 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           _buildSectionTitle("Account"),
           _buildTile(
-            icon: LucideIcons.user,
-            title: "Profile",
-            subtitle: "View or edit your profile",
-            onTap: () {},
-          ),
-          _buildTile(
             icon: LucideIcons.keyRound,
             title: "Change Password",
             subtitle: "Update your password",
@@ -87,19 +81,6 @@ class _SettingsPageState extends State<SettingsPage> {
             title: "About",
             subtitle: "Learn about this app",
             onTap: () {},
-          ),
-          const SizedBox(height: 24),
-
-          _buildSectionTitle("Danger Zone"),
-          _buildTile(
-            icon: LucideIcons.logOut,
-            title: "Logout",
-            subtitle: "Sign out of your account",
-            onTap: () {
-              // Add logout logic
-            },
-            iconColor: Colors.red,
-            textColor: Colors.red.shade700,
           ),
         ],
       ),

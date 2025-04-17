@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:recyclens_app/pages/home/home_options/notifications.dart';
 
 // ignore: must_be_immutable
 class HomeBadge extends StatelessWidget {
@@ -15,7 +17,7 @@ class HomeBadge extends StatelessWidget {
         position: badges.BadgePosition.topEnd(top: 3, end: 3),
         showBadge: avail,
         ignorePointer: false,
-        onTap: () {},
+       
         badgeContent: avail ? Container(
           width: 1, 
           height: 1, 
@@ -38,7 +40,9 @@ class HomeBadge extends StatelessWidget {
         //   borderSide: BorderSide(color: Colors.white, width: 2),
         //   elevation: 0,
         // ),
-        child: IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_active_rounded)),
+        child: IconButton(onPressed: () {
+          Get.to(NotificationsPage());
+        }, icon: const Icon(Icons.notifications_active_rounded)),
       ),
     );
   }
