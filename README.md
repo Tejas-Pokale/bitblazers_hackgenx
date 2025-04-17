@@ -60,7 +60,7 @@ Clone the repository:
 bash
 Copy
 Edit
-git clone https://github.com/your-repo-name/recyclens.git
+git clone https://github.com/Tejas-Pokale/bitblazers_hackgenx
 
 Navigate to the project directory:
 bash
