@@ -11,3 +11,5 @@ AI-Powered Device Classification to identify recyclables and resellables
 E-Waste Marketplace for users to sell functional electronics
 Recycling Center Portal to manage pick-up requests, reward distribution, and analytics
 Community Interaction and issue reporting features to increase public participation
+
+
