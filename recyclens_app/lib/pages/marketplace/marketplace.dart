@@ -79,22 +79,22 @@ class MarketplaceDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton.icon(
-                onPressed: () => onNavigate('logout'),
-                icon: const Icon(Icons.logout, color: Colors.white),
-                label: const Text('Logout'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: ElevatedButton.icon(
+            //     onPressed: () => onNavigate('logout'),
+            //     icon: const Icon(Icons.logout, color: Colors.white),
+            //     label: const Text('Logout'),
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: Colors.redAccent,
+            //       foregroundColor: Colors.white,
+            //       minimumSize: const Size.fromHeight(50),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

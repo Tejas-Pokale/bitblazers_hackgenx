@@ -25,7 +25,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   bool _imageCaptured = false;
   late Interpreter interpreter1;
   late Interpreter interpreter2;
-  dynamic Labels = ['Battery', 'Keyboard', 'Laptop', 'Microwave', 'Mobile', 'Mouse', 'PCB', 'Player', 'Printer', 'Television', 'Washing Machine'];
+  dynamic Labels = [' Air-Conditioner', ' Bar-Phone', ' Battery', ' Blood-Pressure-Monitor', ' Boiler', ' CRT-Monitor', ' CRT-TV', ' Calculator', ' Camera', ' Ceiling-Fan', ' Christmas-Lights', ' Clothes-Iron', ' Coffee-Machine', ' Compact-Fluorescent-Lamps', ' Computer-Keyboard', ' Computer-Mouse', ' Cooled-Dispenser', ' Cooling-Display', ' Dehumidifier', ' Desktop-PC', ' Digital-Oscilloscope', ' Dishwasher', ' Drone', ' Electric-Bicycle', ' Electric-Guitar', ' Electrocardiograph-Machine', ' Electronic-Keyboard', ' Exhaust-Fan', ' Flashlight', ' Flat-Panel-Monitor', ' Flat-Panel-TV', ' Floor-Fan', ' Freezer', ' Glucose-Meter', ' HDD', ' Hair-Dryer', ' Headphone', ' LED-Bulb', ' Laptop', ' Microwave', ' Music-Player', ' Neon-Sign', ' Network-Switch', ' Non-Cooled-Dispenser', ' Oven', ' PCB', ' Patient-Monitoring-System', ' Photovoltaic-Panel', ' PlayStation-5', ' Power-Adapter', ' Printer', ' Projector', ' Pulse-Oximeter', ' Range-Hood', ' Refrigerator', ' Rotary-Mower', ' Router', ' SSD', ' Server', ' Smart-Watch', ' Smartphone', ' Smoke-Detector', ' Soldering-Iron', ' Speaker', ' Stove', ' Straight-Tube-Fluorescent-Lamp', ' Street-Lamp', ' TV-Remote-Control', ' Table-Lamp', ' Tablet', ' Telephone-Set', ' Toaster', ' Tumble-Dryer', ' USB-Flash-Drive', ' Vacuum-Cleaner', ' Washing-Machine', ' Xbox-Series-X'];
   dynamic types = ['resell', 'recycle', 'dispose'];
 
   @override
@@ -59,36 +59,51 @@ class _ImageScanPageState extends State<ImageScanPage>
       Get.snackbar('opps...', 'failed to load model');
     }
   }
-
   
 
- Future<String> classifyImage(File image, Interpreter interpreter, List<String> eWasteNames, int imageSize) async {
+ Future<String> classifyImage(
+  File image,
+  Interpreter interpreter,
+  int imageSize,
+  {double threshold = 0.5}
+) async {
+  // Decode and resize image
   final inputImage = img.decodeImage(await image.readAsBytes())!;
   final resizedImage = img.copyResize(inputImage, width: imageSize, height: imageSize);
 
-  final input = List.generate(1, (batch) => List.generate(imageSize, (y) => List.generate(imageSize, (x) {
-        final pixel = resizedImage.getPixel(x, y);
-        return [
-          pixel.r.toDouble(),
-          pixel.g.toDouble(),
-          pixel.b.toDouble()
-        ];
-      })));
+  // Prepare input in shape: [1, imageSize, imageSize, 3] and preprocess using MobileNetV2 style
+  final input = List.generate(1, (_) => List.generate(imageSize, (y) => List.generate(imageSize, (x) {
+    final pixel = resizedImage.getPixel(x, y);
+    return [
+      (pixel.r.toDouble() - 127.5) / 127.5, // MobileNetV2 preprocessing
+      (pixel.g.toDouble() - 127.5) / 127.5,
+      (pixel.b.toDouble() - 127.5) / 127.5,
+    ];
+  })));
 
-  var output = List.filled(eWasteNames.length, 0.0).reshape([1, eWasteNames.length]);
+  // Output shape: [1, number_of_classes]
+  var output = List.filled(Labels.length, 0.0).reshape([1, Labels.length]);
   interpreter.run(input, output);
 
+  // Apply thresholding for multi-label classification
   List<double> probabilities = output.first.cast<double>();
+  List<String> predictedLabels = [];
 
-  int maxIndex = probabilities.indexWhere((val) => val == probabilities.reduce((a, b) => a > b ? a : b));
-  return eWasteNames[maxIndex];
+  for (int i = 0; i < probabilities.length; i++) {
+    if (probabilities[i] > threshold) {
+      predictedLabels.add(Labels[i]);
+    }
+  }
+
+  return predictedLabels[0];
 }
 
+
  Future<String> runClassification(File? image ,Interpreter interpreter, int imageSize) async {
-  List<String> eWasteNames = Labels; // Load e-waste names from labels.txt
+  //List<String> Labels = Labels; // Load e-waste names from labels.txt
   
   if (image != null) {
-    String result = await classifyImage(image, interpreter, eWasteNames, imageSize);
+    String result = await classifyImage(image, interpreter, imageSize);
     print(result);
     return result;
   } else {
@@ -322,10 +337,14 @@ class _ImageScanPageState extends State<ImageScanPage>
                   // ); // your input data.
                   // List<double> output = await runInference(inputData);
                   // String result = await processOutput(output, ['Battery', 'Keyboard', 'Microwave', 'Mobile', 'Mouse', 'PCB', 'Player', 'Printer', 'Television', 'Washing Machine']);
-                  String result1 = await runClassification(File(_selectedImage!.path) , interpreter1, 224);
+                  try{
+                    String result1 = await runClassification(File(_selectedImage!.path) , interpreter1, 224);
                   String result2 = await runDetermination(File(_selectedImage!.path) , interpreter2, 224);
-                  Get.snackbar('Hehe', '${result1} ${result2}');
+                  Get.snackbar('Result', '${result1} ${result2}');
                   print('${result1} ${result2}');
+                  }catch(e){
+                    Get.snackbar('Opps', '${e}',);
+                  }
                 },
                 icon: const Icon(Icons.arrow_forward),
                 label: const Text("Proceed"),

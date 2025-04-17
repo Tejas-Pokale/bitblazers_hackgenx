@@ -4,7 +4,7 @@ import 'package:recyclens_app/models/human.dart';
 
 class GenderPicker extends StatefulWidget {
   GenderPicker({super.key});
-
+  String? selectedGender; 
   final genders = [
     Human(color: Colors.red, icon: Icons.male, title: 'male'),
     Human(color: const Color.fromARGB(255, 241, 7, 222), icon: Icons.female, title: 'female'),
@@ -16,7 +16,7 @@ class GenderPicker extends StatefulWidget {
 }
 
 class _GenderPickerState extends State<GenderPicker> {
-  String? selectedGender; // Add this variable to store the selected gender
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _GenderPickerState extends State<GenderPicker> {
           flex: 2,
           child: DropdownButton(
             dropdownColor: Colors.black,
-            value: selectedGender, // Assign the selected gender here
+            value: widget.selectedGender, // Assign the selected gender here
             items: widget.genders.map((gen) {
               return DropdownMenuItem(
                 value: gen.title, // Assign the value as the selected Human object
@@ -63,7 +63,7 @@ class _GenderPickerState extends State<GenderPicker> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                selectedGender = value!; // Update the selected gender
+                widget.selectedGender = value!; // Update the selected gender
               });
             },
           ),

@@ -6,6 +6,7 @@ import 'package:recyclens_app/pages/home/home_options/insights.dart';
 import 'package:recyclens_app/pages/home/home_options/recycling_centers.dart';
 import 'package:recyclens_app/pages/home/home_options/report_ewaste.dart';
 import 'package:recyclens_app/pages/home/home_options/rewards.dart';
+import 'package:recyclens_app/pages/home/home_options/schedule_pickup.dart';
 import 'package:recyclens_app/pages/home/home_options/tracking.dart';
 
 class HomeScreenOptions extends StatelessWidget {
@@ -24,6 +25,8 @@ class HomeScreenOptions extends StatelessWidget {
         (context) => Get.to(() => ReportEWasteScreen(), transition: Transition.cupertinoDialog)),
     _Option('Insights on E-Waste', Icons.menu_book, Colors.lightBlueAccent,
         (context) => Get.to(() => InsightsPage(), transition: Transition.cupertinoDialog)),
+     _Option('Schedule Pickup', Icons.add_box_outlined, Colors.yellowAccent,
+        (context) => Get.to(() => SchedulePickupPage(), transition: Transition.cupertinoDialog)),
   ];
 
   HomeScreenOptions({super.key});

@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:recyclens_app/controllers/user_controller.dart';
+import 'package:recyclens_app/models/user.dart';
 import 'package:recyclens_app/pages/home/drawer.dart';
 import 'package:recyclens_app/widgets/age_picker.dart';
 import 'package:recyclens_app/widgets/gender_picker.dart';
@@ -14,9 +20,12 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  final userController = Get.find<UserController>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+  final agePicker = AgePicker() ;
+  final genderPicker = GenderPicker();
 
   String _userType = 'Individual';
   bool _isFetchingLocation = false;
@@ -62,8 +71,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
         content: Text(message),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.teal.shade700,
+        key:  UniqueKey(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    final user = userController.currentUser.value! ;
+    _nameController.text = user.name ;
+    _phoneController.text = user.phone;
+    _locationController.text = user.location;
+    agePicker.date = user.age ;
+    genderPicker.selectedGender = user.gender;
+    super.initState();
   }
 
   @override
@@ -74,7 +95,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text('Create Account'),
+        title: const Text('Your Profile'),
         centerTitle: true,
         backgroundColor: themeColor,
         elevation: 0,
@@ -167,10 +188,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 const SizedBox(height: 20),
 
-                const AgePicker(),
+                agePicker,
                 const SizedBox(height: 20),
 
-                 GenderPicker(),
+                 genderPicker,
                 const SizedBox(height: 20),
 
                 // Account Type Dropdown
@@ -201,7 +222,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ElevatedButton.icon(
                   onPressed: saveData,
                   icon: const Icon(Icons.save),
-                  label: const Text('Create Account'),
+                  label: const Text('save profile changes'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: themeColor,
                     foregroundColor: Colors.white,
@@ -225,9 +246,77 @@ class _UserProfilePageState extends State<UserProfilePage> {
     );
   }
 
-  void saveData() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const DrawerPage()),
-    );
+  void saveData() async {
+    EasyLoading.show(status: 'Saving profile changes...');
+  final name = _nameController.text.trim();
+  final phone = _phoneController.text.trim();
+  final location = _locationController.text.trim();
+  final age = agePicker.date ?? '';
+  final gender = genderPicker.selectedGender ?? '';
+
+  // Basic validations
+  if (name.isEmpty) {
+    EasyLoading.dismiss();
+    _showSnackbar('Please enter your name');
+    return;
   }
+  if (phone.isEmpty) {
+     EasyLoading.dismiss();
+    _showSnackbar('Please enter your phone number');
+    return;
+  }
+  if (location.isEmpty) {
+     EasyLoading.dismiss();
+    _showSnackbar('Please fetch your location');
+    return;
+  }
+  if (age.isEmpty || age == 'Not selected') {
+     EasyLoading.dismiss();
+    _showSnackbar('Please select your age');
+    return;
+  }
+  if (gender.isEmpty || gender == 'Not selected') {
+     EasyLoading.dismiss();
+    _showSnackbar('Please select your gender');
+    return;
+  }
+
+  // Get current Firebase Auth user
+  final user = FirebaseAuth.instance.currentUser;
+  if (user == null) {
+    _showSnackbar('User not logged in');
+    return;
+  }
+
+  // Create user model
+  final userModel = UserModel(
+    name: name,
+    phone: phone,
+    location: location,
+    age: age,
+    gender: gender,
+    userType: _userType,
+    imageUrl: 'https://th.bing.com/th/id/OIP.868vh_SDCQdcqSIRRKaUgAHaEK?w=317&h=180&c=7&r=0&o=5&pid=1.7' ?? '', // use your ImagePicker state
+  );
+
+  try {
+    // Save to Firestore using UID as document ID
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .update(userModel.toMap());
+
+         EasyLoading.dismiss();
+
+    _showSnackbar('Profile changes saved :)');
+
+    userController.currentUser.value = userModel ;
+
+    // Navigate to Drawer page
+    //Navigator.of(context).pop();
+  } catch (e) {
+     EasyLoading.dismiss();
+    _showSnackbar('Failed to save user: $e');
+  }
+}
 }
