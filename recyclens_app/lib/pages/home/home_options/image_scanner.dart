@@ -49,7 +49,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   Future<void> loadModel() async {
     try {
       interpreter1 = await Interpreter.fromAsset(
-        'assets/models/classifier.tflite',
+        'assets/models/e_waste_classification.tflite',
       );
       interpreter2 = await Interpreter.fromAsset(
         'assets/models/ewaste_processing_model.tflite',
@@ -65,7 +65,7 @@ class _ImageScanPageState extends State<ImageScanPage>
   File image,
   Interpreter interpreter,
   int imageSize,
-  {double threshold = 0.5}
+  {double threshold = 0.3}
 ) async {
   // Decode and resize image
   final inputImage = img.decodeImage(await image.readAsBytes())!;
@@ -75,9 +75,9 @@ class _ImageScanPageState extends State<ImageScanPage>
   final input = List.generate(1, (_) => List.generate(imageSize, (y) => List.generate(imageSize, (x) {
     final pixel = resizedImage.getPixel(x, y);
     return [
-      (pixel.r.toDouble() - 127.5) / 127.5, // MobileNetV2 preprocessing
-      (pixel.g.toDouble() - 127.5) / 127.5,
-      (pixel.b.toDouble() - 127.5) / 127.5,
+      pixel.r.toDouble() / 255,
+          pixel.g.toDouble() / 255,
+          pixel.b.toDouble() / 255
     ];
   })));
 
@@ -343,7 +343,7 @@ class _ImageScanPageState extends State<ImageScanPage>
                   Get.snackbar('Result', '${result1} ${result2}');
                   print('${result1} ${result2}');
                   }catch(e){
-                    Get.snackbar('Opps', '${e}',);
+                    Get.snackbar('Opps...', 'Please upload clear image....',);
                   }
                 },
                 icon: const Icon(Icons.arrow_forward),

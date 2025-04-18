@@ -77,10 +77,11 @@ dependencies:
   google_maps_flutter: ^2.12.1
   tflite_flutter: ^0.11.0
   image: ^4.5.4
-  flutter_native_splash: ^2.4.6
+  splash_master: ^0.0.2
   geocoding: ^3.0.0
   youtube_player_flutter: ^9.1.1
   lucide_icons: ^0.257.0
+  icons_launcher: ^3.0.1
 
   
 
@@ -137,3 +138,40 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+splash_master:
+  # Use to specifies the color for the splash screen
+  color: '#01242a'
+  # Use to specifies the splash image
+  image: 'assets/images/logo.png'
+  # Provides content mode for splash image in iOS
+  # iOS content mode options: scaleToFill, scaleAspectFit, scaleAspectFill, redraw, center, top, bottom,
+  # left, right, topLeft, topRight, bottomLeft, bottomRight.
+  ios_content_mode: 'center'
+  # Provides gravity for splash image in Android
+  # Android gravity options: center, clip_horizontal, clip_vertical, fill_horizontal, fill, center_vertical, 
+  # bottom, fill_vertical, center_horizontal, top, end, left, right, start
+  android_gravity: 'center'
+  # Use to specifies the splash image
+  # background_image: 'assets/background_image.png'
+  # Provided content mode for splash image in background for iOS
+  ios_background_content_mode: 'scaleToFill'
+  # Provides gravity for background image in Android
+  # Android gravity options: center, clip_horizontal, clip_vertical, fill_horizontal, fill, center_vertical, 
+  # bottom, fill_vertical, center_horizontal, top, end, left, right, start
+  android_background_image_gravity: 'fill'
+  # Use to specifies image for android in dark mode
+  image_dark_android: 'assets/images/logo.png'
+  # Provides gravity for splash image for Android in dark mode
+  android_dark_gravity_key: 'center'
+  # Use to specifies the color for the splash screen for Android in dark mode
+  color_dark_android: '#01242a'
+  # Section to specifies the configuration for the splash in Android 12+
+  android_12_and_above:
+    # Provides the background color of splash screen
+    color: '#01242a'
+    # Provides custom icon to replace the default app icon
+    image: 'assets/images/logo.png'
+    # Provides branding image which is shown under main icon image. 
+    # branding_image: 'assets/branding_image.png'
+
